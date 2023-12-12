@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const userrouter = require("./Routes/user.route");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -15,7 +16,7 @@ const app = express();
 
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => res.send("hello the method is: " + req.method));
+app.use("/api/user", userrouter);
 
 app.listen(process.env.PORT, () => {
   console.log("listening on port: " + process.env.PORT);
