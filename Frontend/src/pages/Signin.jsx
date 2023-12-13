@@ -3,9 +3,17 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import {
+  signInStart,
+  signInFailure,
+  signInSuccess,
+} from "../redux/user/user.slice";
+
+import { useDispatch, useSelector } from "react-redux";
+
 export default function Signin() {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -21,7 +29,7 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const res = await fetch("http://localhost:3000/api/auth/signin", {
         method: "POST",
         headers: {
@@ -36,17 +44,15 @@ export default function Signin() {
           password: "",
         });
         const json = await res.json();
-        console.log(json);
-        setLoading(false);
-        setError(false);
+        dispatch(signInSuccess(json));
         navigate("/");
       } else {
-        setLoading(false);
-        setError(true);
+        console.log(error);
+        dispatch(signInFailure(error.message));
+        return;
       }
     } catch (error) {
-      setLoading(false);
-      setError(true);
+      dispatch(signInFailure(error));
     }
   };
 
@@ -87,7 +93,7 @@ export default function Signin() {
       </div>
       {error && (
         <p className="bg-slate-200 rounded-lg text-red-700 p-2 border border-red-700 hover:scale-105 my-5 text-center transition duration-300 ease-in-out ">
-          Username and Email are taken
+          Incorrect Credentials
         </p>
       )}
     </div>
