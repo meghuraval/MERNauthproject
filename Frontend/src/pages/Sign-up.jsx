@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function Signup() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [form, setForm] = useState({
     username: "",
@@ -33,16 +34,16 @@ export default function Signup() {
           password: "",
         });
         const json = await res.json();
-        console.log(json.dir);
-        setLoading(true);
+        setLoading(false);
         setError(false);
-      } else {
+        setSuccess(true);
+      } else if (res.status === 500) {
         setLoading(false);
         setError(true);
       }
     } catch (error) {
       setLoading(false);
-      setError(true);
+      setError(false);
     }
   };
 
@@ -85,7 +86,7 @@ export default function Signup() {
         Have an account?
         <Link to="/signin">
           <span className="text-blue-500 hover:text-blue-700 hover:underline">
-            Sign in
+            Create an account
           </span>
         </Link>
       </div>
@@ -93,6 +94,26 @@ export default function Signup() {
         <p className="bg-slate-200 rounded-lg text-red-700 p-2 border border-red-700 hover:scale-105 my-5 text-center transition duration-300 ease-in-out ">
           Username and Email are taken
         </p>
+      )}
+      {success && (
+        <div className="flex flex-col items-center justify-center">
+          <p className="bg-slate-200 rounded-lg text-green-700 p-2 border border-green-700 hover:scale-105 my-5 text-center transition duration-300 ease-in-out ">
+            Succesfully created an account
+          </p>
+
+          <Link to={"/signin"}>
+            <button
+              style={{
+                backgroundColor: "#fba944",
+                color: "#e14763",
+                borderColor: "#fba944",
+              }}
+              className=" rounded-lg  p-2 border hover:scale-105 text-center transition duration-300 ease-in-out"
+            >
+              Sign in Now
+            </button>
+          </Link>
+        </div>
       )}
     </div>
   );
