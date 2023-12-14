@@ -47,12 +47,11 @@ export default function Signin() {
         dispatch(signInSuccess(json));
         navigate("/");
       } else {
-        console.log(error);
-        dispatch(signInFailure(error.message));
+        dispatch(signInFailure("Incorrect credentials"));
         return;
       }
     } catch (error) {
-      dispatch(signInFailure(error));
+      dispatch(signInFailure("Error occured while signing in"));
     }
   };
 
