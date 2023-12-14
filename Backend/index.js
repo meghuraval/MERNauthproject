@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const userrouter = require("./Routes/user.route");
 const authrouter = require("./Routes/auth.route");
+const cors = require("cors");
 
 const dotenv = require("dotenv");
 
@@ -15,6 +16,13 @@ try {
 }
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
