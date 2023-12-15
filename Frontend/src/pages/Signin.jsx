@@ -47,6 +47,9 @@ export default function Signin() {
         navigate("/");
       } else {
         dispatch(signInFailure("Incorrect credentials"));
+        setTimeout(() => {
+          dispatch(signInFailure(null));
+        }, 2000);
         return;
       }
     } catch (error) {
@@ -62,7 +65,7 @@ export default function Signin() {
           type="email"
           placeholder="Email"
           id="email"
-          className="bg-slate-100 p-3 rounded-lg"
+          className="bg-slate-100 p-3 rounded-lg hover:bg-slate-200 transition duration-300"
           onChange={handleChange}
           value={form.email}
         />
@@ -70,7 +73,7 @@ export default function Signin() {
           type="password"
           placeholder="Passsword"
           id="password"
-          className="bg-slate-100 p-3 rounded-lg"
+          className="bg-slate-100 p-3 rounded-lg hover:bg-slate-200 transition duration-300"
           onChange={handleChange}
           value={form.password}
         />
@@ -86,7 +89,7 @@ export default function Signin() {
         Dont have an account?
         <Link to="/signup">
           <span className="text-blue-500 hover:text-blue-700 hover:underline">
-            Sign up
+            Sign up 😎
           </span>
         </Link>
       </div>

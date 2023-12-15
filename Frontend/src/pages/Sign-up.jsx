@@ -55,7 +55,7 @@ export default function Signup() {
           type="text"
           placeholder="Username"
           id="username"
-          className="bg-slate-100 p-3 rounded-lg"
+          className="bg-slate-100 p-3 rounded-lg  hover:bg-slate-200 transition duration-300"
           onChange={handleChange}
           value={form.username}
         />
@@ -63,7 +63,7 @@ export default function Signup() {
           type="email"
           placeholder="Email"
           id="email"
-          className="bg-slate-100 p-3 rounded-lg"
+          className="bg-slate-100 p-3 rounded-lg hover:bg-slate-200 transition duration-300"
           onChange={handleChange}
           value={form.email}
         />
@@ -71,7 +71,7 @@ export default function Signup() {
           type="password"
           placeholder="Passsword"
           id="password"
-          className="bg-slate-100 p-3 rounded-lg"
+          className="bg-slate-100 p-3 rounded-lg  hover:bg-slate-200 transition duration-300"
           onChange={handleChange}
           value={form.password}
         />
@@ -87,7 +87,7 @@ export default function Signup() {
         Have an account?
         <Link to="/signin">
           <span className="text-blue-500 hover:text-blue-700 hover:underline">
-            Create an account
+            Sign In 😃
           </span>
         </Link>
       </div>
