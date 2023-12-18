@@ -1,7 +1,7 @@
-/*const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const errorHandler = require("./error.js");
 
-verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
 
   if (!token) return next(errorHandler(401, "You are not authenticated!"));
@@ -14,4 +14,4 @@ verifyToken = (req, res, next) => {
   });
 };
 
-module.exports = verifyToken;*/
+module.exports = verifyToken;

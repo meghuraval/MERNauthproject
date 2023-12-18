@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const userrouter = require("./Routes/user.route");
 const authrouter = require("./Routes/auth.route");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const dotenv = require("dotenv");
 
@@ -24,6 +25,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
